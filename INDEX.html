@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oferta / Acesso</title>
+
+  <style>
+    :root{
+      --bg0:#040507;
+      --bg1:#070a0f;
+
+      --glass: rgba(18, 21, 28, 0.62);
+      --stroke: rgba(255,255,255,.085);
+      --stroke2: rgba(255,255,255,.06);
+
+      --text:#e9edf2;
+      --muted:#a6afbb;
+
+      --gold:#d8b773;
+      --green:#27e07a;
+      --green2:#18b760;
+
+      --shadow: rgba(0,0,0,.55);
+      --shadow2: rgba(0,0,0,.78);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial;
+      background:
+        radial-gradient(1100px 600px at 50% 0%, rgba(60,110,255,.10), transparent 55%),
+        radial-gradient(900px 700px at 20% 30%, rgba(255,210,120,.08), transparent 60%),
+        radial-gradient(800px 800px at 70% 60%, rgba(60,255,180,.06), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg0));
+      overflow-x:hidden;
+    }
+
+    /* vinheta + ruído sutil */
+    body:before{
+      content:"";
+      position:fixed; inset:-40px;
+      background:
+        radial-gradient(circle at 50% 40%, transparent 35%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.85) 100%);
+      pointer-events:none;
+      z-index:0;
+    }
+    body:after{
+      content:"";
+      position:fixed; inset:0;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+      opacity:.18;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .screen{
+      position:relative;
+      z-index:1;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 22px 14px 34px;
+    }
+
+    /* CARD PRINCIPAL */
+    .card{
+      position:relative;
+      border-radius: 22px;
+      padding: 18px 16px 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        var(--glass);
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+      box-shadow:
+        0 34px 90px var(--shadow2),
+        0 10px 28px var(--shadow);
+      overflow:hidden;
+    }
+
+    /* highlight premium na borda */
+    .card:before{
+      content:"";
+      position:absolute; inset:0;
+      border-radius: 22px;
+      padding:1px;
+      background: linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,0) 45%, rgba(255,255,255,.10));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events:none;
+      opacity:.7;
+    }
+
+    /* brilho interno leve */
+    .card:after{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 220px at 50% 0%, rgba(255,255,255,.10), transparent 55%),
+        radial-gradient(320px 220px at 20% 35%, rgba(216,183,115,.10), transparent 60%);
+      pointer-events:none;
+      opacity:.55;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing:.2px;
+      color: #f3e2b8;
+      background: linear-gradient(180deg, rgba(216,183,115,.22), rgba(216,183,115,.10));
+      border: 1px solid rgba(216,183,115,.22);
+      box-shadow: 0 10px 24px rgba(0,0,0,.25) inset;
+    }
+
+    h1{
+      margin: 12px 0 6px;
+      font-size: 22px;
+      letter-spacing:.4px;
+    }
+
+    .subtitle{
+      margin:0;
+      color: rgba(233,237,242,.72);
+      font-size: 13.5px;
+      line-height: 1.35;
+    }
+
+    .features{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 12px 0 10px;
+    }
+
+    .pill{
+      font-size: 12px;
+      color: rgba(233,237,242,.86);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.07);
+      padding: 7px 10px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .limited{
+      margin: 10px 0 10px;
+      color: rgba(216,183,115,.95);
+      font-size: 12.8px;
+      font-weight: 700;
+    }
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
+      margin: 10px 0 12px;
+    }
+
+    .steps{
+      list-style:none;
+      padding:0;
+      margin: 0 0 12px;
+      display:grid;
+      gap:10px;
+    }
+
+    .step{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size: 13.5px;
+      color: rgba(233,237,242,.88);
+    }
+
+    .step .num{
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      display:grid;
+      place-items:center;
+      font-weight: 800;
+      font-size: 12.5px;
+      color:#062012;
+      background: linear-gradient(180deg, rgba(39,224,122,1), rgba(24,183,96,1));
+      box-shadow:
+        0 10px 18px rgba(39,224,122,.12),
+        0 10px 28px rgba(0,0,0,.25);
+      flex: 0 0 auto;
+    }
+
+    button{
+      width:100%;
+      border:none;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing:.3px;
+      cursor:pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .primary{
+      margin-top: 8px;
+      color:#062012;
+      background: linear-gradient(180deg, var(--green), var(--green2));
+      box-shadow:
+        0 18px 42px rgba(39,224,122,.18),
+        0 10px 26px rgba(0,0,0,.35);
+      position:relative;
+    }
+
+    .primary:before{
+      content:"";
+      position:absolute; inset:1px;
+      border-radius: 13px;
+      background: radial-gradient(260px 90px at 50% 0%, rgba(255,255,255,.38), transparent 60%);
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    .secondary{
+      margin-top: 10px;
+      color: rgba(233,237,242,.92);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 16px 40px rgba(0,0,0,.42);
+    }
+
+    .disclaimer{
+      display:block;
+      text-align:center;
+      margin-top: 10px;
+      font-size: 11px;
+      color: rgba(166,175,187,.82);
+    }
+
+    /* COMO FUNCIONA */
+    .how{
+      margin-top: 18px;
+      padding: 14px 2px 0;
+    }
+
+    .how h2{
+      margin: 0 0 10px;
+      font-size: 15px;
+      letter-spacing:.2px;
+      color: rgba(233,237,242,.92);
+    }
+
+    .flow{
+      position:relative;
+      padding-left: 14px;
+    }
+
+    .flow:before{
+      content:"";
+      position:absolute;
+      left: 6px;
+      top: 8px;
+      bottom: 10px;
+      width:2px;
+      background: linear-gradient(180deg, rgba(39,224,122,.35), rgba(39,224,122,.06));
+      border-radius: 99px;
+      opacity:.9;
+    }
+
+    .item{
+      position:relative;
+      margin: 10px 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+        rgba(18, 21, 28, 0.58);
+      border: 1px solid var(--stroke2);
+      border-radius: 16px;
+      padding: 12px;
+      display:flex;
+      gap:10px;
+      backdrop-filter: blur(18px) saturate(130%);
+      -webkit-backdrop-filter: blur(18px) saturate(130%);
+      box-shadow: 0 18px 50px rgba(0,0,0,.50);
+    }
+
+    .dot{
+      position:absolute;
+      left: -2px;
+      top: 18px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: rgba(39,224,122,1);
+      box-shadow: 0 0 0 6px rgba(39,224,122,.12);
+    }
+
+    .icon{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display:grid;
+      place-items:center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 16px;
+      flex: 0 0 auto;
+    }
+
+    .item strong{
+      display:block;
+      font-size: 13.5px;
+      margin-bottom: 2px;
+    }
+    .item p{
+      margin:0;
+      font-size: 12.5px;
+      color: rgba(166,175,187,.85);
+      line-height:1.3;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="screen">
+
+    <section class="card">
+      <span class="badge">ACESSO EXCLUSIVO</span>
+
+      <h1>OFERTA / ACESSO</h1>
+      <p class="subtitle">Cadastre-se seguindo as instruções e comece já</p>
+
+      <div class="features">
+        <span class="pill">⚡ Liberação rápida</span>
+        <span class="pill">💬 Suporte no WhatsApp</span>
+      </div>
+
+      <p class="limited">Oferta limitada para novos usuários</p>
+
+      <div class="divider"></div>
+
+      <ul class="steps">
+        <li class="step"><span class="num">1</span> Cadastre-se e valide seus dados</li>
+        <li class="step"><span class="num">2</span> Siga as etapas do processo</li>
+        <li class="step"><span class="num">3</span> Solicite via suporte</li>
+        <li class="step"><span class="num">4</span> Envie comprovante para validação</li>
+      </ul>
+
+      <button class="primary">✔ CLIQUE AQUI E SE CADASTRE</button>
+      <button class="secondary">SUPORTE</button>
+
+      <small class="disclaimer">Sujeito à validação e regras do serviço.</small>
+    </section>
+
+    <section class="how">
+      <h2>Como funciona</h2>
+
+      <div class="flow">
+        <div class="item">
+          <span class="dot"></span>
+          <div class="icon">📝</div>
+          <div>
+            <strong>Faça seu cadastro</strong>
+            <p>Alteração pós seguro.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <span class="dot"></span>
+          <div class="icon">🛡️</div>
+          <div>
+            <strong>Conclua a validação</strong>
+            <p>Aproveite processos seguros.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <span class="dot"></span>
+          <div class="icon">💬</div>
+          <div>
+            <strong>Fale com o suporte</strong>
+            <p>Envie o comprovante para validação.</p>
+          </div>
+        </div>
+
+        <div class="item">
+          <span class="dot"></span>
+          <div class="icon">🎁</div>
+          <div>
+            <strong>Receba a confirmação</strong>
+            <p>Conforme regras e termos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
