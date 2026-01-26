@@ -1,10 +1,4 @@
 services:
   - type: static
-    name: sitecass
-    buildCommand: echo "Static site - no build needed"
+    name: novousuario
     staticPublishPath: .
-    routes:
-      - path: "/"
-        methods:
-          - GET
-        missingRoutePolicy: default_index
