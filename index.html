@@ -2,8 +2,8 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Oferta / Acesso (1x1)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <title>Oferta / Acesso</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,73 +11,62 @@
 
   <style>
     :root{
-      /* ✅ TROQUE AQUI pela sua imagem (pode ser URL ou ./fundo.jpg) */
-      --bg-image: url("./fundojpg.png");
+      /* ✅ COLOQUE SUA IMAGEM AQUI (mobile) */
+      --bg-image: url("./fundo.jpg");
 
-      /* Base do fundo (ajuda a “assentar” o blur/glass) */
-      --bg0:#05070c;
-      --bg1:#08111a;
-
-      /* Glass */
-      --glass: rgba(18, 24, 34, .62);
-      --stroke: rgba(255,255,255,.10);
-      --stroke2: rgba(255,255,255,.06);
-
-      /* Tipografia */
-      --text: #e8eef7;
+      --text:#e8eef7;
       --muted:#a7b0bd;
 
-      /* Cores (print) */
       --gold:#e6c77a;
-      --gold2:#bda25d;
 
-      --g0:#2ff2a6;
-      --g1:#19c985;
-      --gShadow: rgba(47,242,166,.22);
+      --g0:#35f5b0;
+      --g1:#1bcf8b;
 
       --shadow0: rgba(0,0,0,.60);
       --shadow1: rgba(0,0,0,.88);
+
+      --stroke: rgba(255,255,255,.10);
+      --stroke2: rgba(255,255,255,.06);
 
       --radius: 22px;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+
     body{
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color:var(--text);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
 
-      /* ✅ FUNDO COM IMAGEM */
+      /* fundo com imagem + “tinta” escura por cima */
       background:
-        linear-gradient(180deg, rgba(8,17,26,.82), rgba(5,7,12,.92)),
+        linear-gradient(180deg, rgba(8,14,22,.78), rgba(2,4,8,.92)),
         var(--bg-image);
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
 
-      display:grid;
-      place-items:center;
-      padding: 26px 14px;
       overflow-x:hidden;
       position:relative;
     }
 
-    /* Vinheta + “tinta” (pra ficar igual ao print) */
+    /* vinheta + cor premium */
     body:before{
       content:"";
       position:fixed; inset:-60px;
       background:
-        radial-gradient(circle at 50% 42%, transparent 28%, rgba(0,0,0,.52) 70%, rgba(0,0,0,.88) 100%),
-        radial-gradient(1100px 650px at 50% 0%, rgba(47,242,166,.12), transparent 62%),
+        radial-gradient(circle at 50% 42%, transparent 26%, rgba(0,0,0,.55) 70%, rgba(0,0,0,.90) 100%),
+        radial-gradient(1100px 650px at 50% 0%, rgba(53,245,176,.12), transparent 62%),
         radial-gradient(900px 700px at 18% 35%, rgba(230,199,122,.10), transparent 62%);
       pointer-events:none;
       z-index:0;
     }
 
-    /* Grain */
+    /* grain */
     body:after{
       content:"";
       position:fixed; inset:0;
@@ -88,32 +77,30 @@
       z-index:0;
     }
 
-    /* ====== WRAP ====== */
-    .wrap{
-      width:min(420px, 100%);
+    .screen{
       position:relative;
       z-index:1;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 22px 14px 28px;
     }
 
-    /* ====== CARD (1x1) ====== */
+    /* ===== CARD PRINCIPAL ===== */
     .offer-card{
       position:relative;
       border-radius: var(--radius);
       padding: 18px 16px 16px;
 
-      /* truque do print: glass + leve “tinta” azul/verde por cima */
+      /* glass “puxa” cor do fundo (igual print) */
       background:
-  linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015)),
-  radial-gradient(900px 360px at 50% 0%, rgba(80,140,160,.22), transparent 65%),
-  radial-gradient(600px 420px at 20% 40%, rgba(40,120,110,.18), transparent 70%),
-  rgba(14, 22, 30, .62);
-
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.015)),
+        radial-gradient(900px 360px at 50% 0%, rgba(80,140,160,.22), transparent 65%),
+        radial-gradient(600px 420px at 20% 40%, rgba(40,120,110,.18), transparent 70%),
+        rgba(14, 22, 30, .62);
 
       border: 1px solid var(--stroke);
-
-backdrop-filter: blur(30px) saturate(155%);
-      -webkit-backdrop-filter: blur(26px) saturate(150%);
-
+      backdrop-filter: blur(30px) saturate(155%);
+      -webkit-backdrop-filter: blur(30px) saturate(155%);
       box-shadow:
         0 34px 95px var(--shadow1),
         0 12px 32px var(--shadow0);
@@ -140,21 +127,20 @@ backdrop-filter: blur(30px) saturate(155%);
       opacity:.78;
     }
 
-    /* glow interno suave */
+    /* glow interno */
     .offer-card:after{
       content:"";
       position:absolute; inset:-2px;
       background:
         radial-gradient(680px 240px at 50% 0%, rgba(255,255,255,.10), transparent 58%),
         radial-gradient(360px 240px at 20% 35%, rgba(230,199,122,.11), transparent 64%),
-        radial-gradient(420px 260px at 82% 58%, rgba(47,242,166,.10), transparent 66%);
+        radial-gradient(420px 260px at 82% 58%, rgba(53,245,176,.10), transparent 66%);
       pointer-events:none;
       opacity:.58;
     }
 
     .content{ position:relative; z-index:1; }
 
-    /* topo */
     .badge{
       display:inline-flex;
       align-items:center;
@@ -188,14 +174,12 @@ backdrop-filter: blur(30px) saturate(155%);
     }
     .subtitle b{ font-weight:800; color: rgba(232,238,247,.92); }
 
-    /* pills */
     .pills{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       margin: 12px 0 10px;
     }
-
     .pill{
       display:inline-flex;
       align-items:center;
@@ -213,8 +197,8 @@ backdrop-filter: blur(30px) saturate(155%);
     .pill .dot{
       width:6px; height:6px;
       border-radius:50%;
-      background: rgba(47,242,166,.92);
-      box-shadow: 0 0 0 4px rgba(47,242,166,.10);
+      background: rgba(53,245,176,.92);
+      box-shadow: 0 0 0 4px rgba(53,245,176,.10);
     }
 
     .limited{
@@ -224,17 +208,19 @@ backdrop-filter: blur(30px) saturate(155%);
       font-weight: 700;
     }
 
-    /* steps panel */
+    /* painel de etapas */
     .steps-box{
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)),
-    rgba(8, 14, 20, .58);
-  border: 1px solid rgba(255,255,255,.05);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.06),
-    0 20px 60px rgba(0,0,0,.65);
-}
-
+      margin-top: 10px;
+      border-radius: 16px;
+      padding: 12px 12px 10px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)),
+        rgba(8, 14, 20, .58);
+      border: 1px solid rgba(255,255,255,.05);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.06),
+        0 20px 60px rgba(0,0,0,.65);
+    }
 
     .steps{
       list-style:none;
@@ -246,26 +232,36 @@ backdrop-filter: blur(30px) saturate(155%);
 
     .step{
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       gap:10px;
       font-size: 12.8px;
       font-weight: 600;
       color: rgba(232,238,247,.88);
       letter-spacing:.1px;
+      line-height: 1.25;
     }
 
-   .num{
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 55%),
-    linear-gradient(180deg, #35f5b0, #1bcf8b);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.35),
-    0 10px 22px rgba(47,242,166,.25),
-    0 0 22px rgba(47,242,166,.25);
-}
+    .num{
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      display:grid;
+      place-items:center;
+      font-weight: 800;
+      font-size: 12px;
+      color:#06130d;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 55%),
+        linear-gradient(180deg, var(--g0), var(--g1));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.35),
+        0 10px 22px rgba(53,245,176,.25),
+        0 0 22px rgba(53,245,176,.18);
+      flex:0 0 auto;
+      margin-top: 1px;
+    }
 
-
-    /* buttons */
+    /* Botões */
     .actions{ margin-top: 12px; display:grid; gap:10px; }
 
     .btn{
@@ -282,22 +278,15 @@ backdrop-filter: blur(30px) saturate(155%);
       position:relative;
     }
 
-   .btn-primary{
-  background:
-    radial-gradient(300px 120px at 50% 0%, rgba(255,255,255,.45), transparent 60%),
-    linear-gradient(180deg, #35f5b0, #1bcf8b);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.45),
-    0 22px 55px rgba(47,242,166,.35),
-    0 12px 30px rgba(0,0,0,.55);
-    }
-    .btn-primary:before{
-      content:"";
-      position:absolute; inset:1px;
-      border-radius: 13px;
-      background: radial-gradient(260px 90px at 50% 0%, rgba(255,255,255,.34), transparent 64%);
-      opacity:.55;
-      pointer-events:none;
+    .btn-primary{
+      color:#07160f;
+      background:
+        radial-gradient(300px 120px at 50% 0%, rgba(255,255,255,.45), transparent 60%),
+        linear-gradient(180deg, var(--g0), var(--g1));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.45),
+        0 22px 55px rgba(53,245,176,.35),
+        0 12px 30px rgba(0,0,0,.55);
     }
     .check{
       display:inline-grid;
@@ -312,7 +301,8 @@ backdrop-filter: blur(30px) saturate(155%);
 
     .btn-secondary{
       color: rgba(232,238,247,.92);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       border: 1px solid rgba(255,255,255,.10);
       box-shadow: 0 16px 40px rgba(0,0,0,.44);
     }
@@ -331,18 +321,111 @@ backdrop-filter: blur(30px) saturate(155%);
       color: rgba(167,176,189,.88);
     }
 
-    /* pequena “borda interna” igual ao print (subtil) */
-    .inner-line{
-      height:1px;
-      margin: 10px 0 12px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
-      opacity:.9;
+    /* ====== DICAS (PARTE DE BAIXO) ====== */
+    .tips{
+      margin-top: 14px;
+      padding: 0 2px;
+    }
+
+    .tips-title{
+      margin: 0 0 8px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      color: rgba(232,238,247,.92);
+    }
+
+    .tips-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:grid;
+      gap:8px;
+    }
+
+    .tip{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color: rgba(232,238,247,.90);
+      font-size: 12.4px;
+      font-weight: 600;
+      letter-spacing:.1px;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .tip .ok{
+      width:18px; height:18px;
+      border-radius: 6px;
+      display:grid;
+      place-items:center;
+      flex: 0 0 auto;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.35), transparent 55%),
+        linear-gradient(180deg, var(--g0), var(--g1));
+      color:#06130d;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.35),
+        0 10px 20px rgba(53,245,176,.18);
+      margin-top: 1px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .warn{
+      margin-top: 12px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)),
+        rgba(10, 14, 20, .52);
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow: 0 16px 44px rgba(0,0,0,.55);
+      color: rgba(232,238,247,.92);
+      font-size: 12.2px;
+      font-weight: 800;
+      letter-spacing:.2px;
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+
+    .warn .alert{
+      color: #ff5656;
+      margin-right: 6px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
+    }
+
+    .raffle{
+      margin-top: 10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      background:
+        radial-gradient(520px 200px at 50% 0%, rgba(230,199,122,.12), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)),
+        rgba(10, 14, 20, .52);
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow: 0 16px 44px rgba(0,0,0,.55);
+      color: rgba(232,238,247,.92);
+      font-size: 12.2px;
+      font-weight: 800;
+      letter-spacing:.2px;
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+
+    .raffle .spark{
+      color: var(--gold);
+      margin-right: 6px;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <main class="screen">
+
+    <!-- CARD -->
     <section class="offer-card">
       <div class="content">
         <span class="badge">ACESSO EXCLUSIVO</span>
@@ -359,10 +442,10 @@ backdrop-filter: blur(30px) saturate(155%);
 
         <div class="steps-box">
           <ul class="steps">
-            <li class="step"><span class="num">1</span>Cadastre-se e valide seus dados</li>
-            <li class="step"><span class="num">2</span>Siga as etapas do processo</li>
-            <li class="step"><span class="num">3</span>Solicite via suporte</li>
-            <li class="step"><span class="num">4</span>Envie comprovante para validação</li>
+            <li class="step"><span class="num">1</span>Faça seu cadastro e valide seus dados</li>
+            <li class="step"><span class="num">2</span>Conclua R$20 para jogar (no pix)</li>
+            <li class="step"><span class="num">3</span>Após realizar a primeira aposta válida, pode receber mais R$100 promocionais (no pix)</li>
+            <li class="step"><span class="num">4</span>Vamos precisar da sua chave pix para envio do dinheiro</li>
           </ul>
         </div>
 
@@ -379,6 +462,28 @@ backdrop-filter: blur(30px) saturate(155%);
         <div class="disclaimer">Sujeito à validação e regras do serviço.</div>
       </div>
     </section>
-  </div>
+
+    <!-- DICAS (parte de baixo) -->
+    <section class="tips">
+      <h2 class="tips-title">Dicas:</h2>
+
+      <ul class="tips-list">
+        <li class="tip"><span class="ok">✓</span>USE UM TELEFONE VÁLIDO PRA CHEGAR SMS</li>
+        <li class="tip"><span class="ok">✓</span>USE UM EMAIL VÁLIDO</li>
+        <li class="tip"><span class="ok">✓</span>LEMBRE DO SEU NOME DE USUÁRIO</li>
+        <li class="tip"><span class="ok">✓</span>QUANDO CHEGAR NA PARTE DO DEPÓSITO, MANDE UM PRINT</li>
+        <li class="tip"><span class="ok">✓</span>QUALQUER DÚVIDA OU ERRO, PODE MANDAR AQUI NO CHAT</li>
+      </ul>
+
+      <div class="warn">
+        <span class="alert">🚨</span>LEMBRANDO QUE TEM QUE GASTAR OS 20 REAIS PRA RECEBER O RESTANTE!!
+      </div>
+
+      <div class="raffle">
+        <span class="spark">✨</span>TODA SEMANA SORTEAMOS PIX DE 100, 200 E ATÉ 500 PRA NOVOS USUÁRIOS
+      </div>
+    </section>
+
+  </main>
 </body>
 </html>
